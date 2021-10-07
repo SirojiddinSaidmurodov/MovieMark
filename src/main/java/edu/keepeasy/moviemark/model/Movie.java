@@ -15,17 +15,11 @@ public class Movie {
     private LocalDate releaseDate;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "movie_counties",
-            joinColumns = @JoinColumn(name = "movie_id", referencedColumnName = "counties_id"))
     private Set<Country> counties;
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "movie_artist",
-            joinColumns = @JoinColumn(name = "movie_id", referencedColumnName = "artist_id"))
     private Set<Artist> artists;
 
     @OneToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "movie_actor",
-            joinColumns = @JoinColumn(name = "movie_id", referencedColumnName = "actor_id"))
     private Set<Actor> actors;
     private Long budget;
     private Long box;
