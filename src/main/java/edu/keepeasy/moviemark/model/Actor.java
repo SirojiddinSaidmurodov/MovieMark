@@ -1,17 +1,25 @@
 package edu.keepeasy.moviemark.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Table(name = "actors")
 @Entity
 public class Actor {
     @Id
     @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String role;
+    @Column(nullable = false, columnDefinition = "boolean default false")
+    private boolean cameo;
+
+    public boolean isCameo() {
+        return cameo;
+    }
+
+    public void setCameo(boolean cameo) {
+        this.cameo = cameo;
+    }
 
     public String getRole() {
         return role;
