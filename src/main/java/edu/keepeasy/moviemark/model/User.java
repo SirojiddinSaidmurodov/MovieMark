@@ -3,7 +3,7 @@ package edu.keepeasy.moviemark.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "users")
+@Table(name = "usr")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
