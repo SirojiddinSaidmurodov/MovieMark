@@ -2,10 +2,8 @@ package edu.keepeasy.moviemark.security;
 
 import edu.keepeasy.moviemark.model.User;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import java.util.Collection;
-import java.util.List;
 
 public class UserDetails implements org.springframework.security.core.userdetails.UserDetails {
     private final User user;
@@ -16,8 +14,7 @@ public class UserDetails implements org.springframework.security.core.userdetail
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(user.getRole());
-        return List.of(authority);
+        return user.getRole().getAuthorities();
     }
 
     @Override
@@ -32,17 +29,17 @@ public class UserDetails implements org.springframework.security.core.userdetail
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return user.isActive();
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return user.isActive();
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return user.isActive();
     }
 
     @Override
