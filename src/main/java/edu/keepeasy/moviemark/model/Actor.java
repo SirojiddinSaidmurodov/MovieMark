@@ -12,6 +12,16 @@ public class Actor {
     private String role;
     @Column(nullable = false, columnDefinition = "boolean default false")
     private boolean cameo;
+    @ManyToOne
+    private Person person;
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
+    }
 
     public boolean isCameo() {
         return cameo;
