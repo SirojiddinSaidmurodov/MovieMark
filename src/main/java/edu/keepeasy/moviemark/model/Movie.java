@@ -18,7 +18,6 @@ public class Movie {
     private Set<Country> counties;
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Artist> artists;
-
     @OneToMany(fetch = FetchType.EAGER)
     private Set<Actor> actors;
     private Long budget;
