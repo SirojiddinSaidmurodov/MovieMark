@@ -22,7 +22,7 @@ public class JwtToken {
     private String header;
     @Value("${jwt.secret}")
     private String secret;
-    @Value("${jwt.expiration}")
+    @Value("${jwt.expiration")
     private long validity;
 
     @Autowired
@@ -39,19 +39,19 @@ public class JwtToken {
         Claims claims = Jwts.claims().setSubject(username);
         claims.put("role", role);
         Date now = new Date();
-        Date validity = new Date(now.getTime() + 1000 * 600);
+        Date expiration = new Date(now.getTime() + 1000 * validity);
         return Jwts.builder()
                 .setClaims(claims)
                 .setIssuedAt(now)
-                .setExpiration(validity)
+                .setExpiration(expiration)
                 .signWith(SignatureAlgorithm.HS256, secret)
                 .compact();
     }
 
     public boolean validate(String token) throws JwtAuthenticationException {
         try {
-            Jws<Claims> claimsJws = Jwts.parser().setSigningKey(secret).parseClaimsJws(token);
-            return !claimsJws.getBody().getExpiration().before(new Date());
+            Jws<Claims> claims = Jwts.parserBuilder().setSigningKey(secret).build().parseClaimsJws(token);
+            return !claims.getBody().getExpiration().before(new Date());
         } catch (JwtException | IllegalArgumentException e) {
             throw new JwtAuthenticationException("Token is expired", HttpStatus.UNAUTHORIZED);
         }
@@ -63,7 +63,7 @@ public class JwtToken {
     }
 
     public String getUsername(String token) {
-        return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody().getSubject();
+        return Jwts.parserBuilder().setSigningKey(secret).build().parseClaimsJws(token).getBody().getSubject();
     }
 
     public String resolve(HttpServletRequest request) {
