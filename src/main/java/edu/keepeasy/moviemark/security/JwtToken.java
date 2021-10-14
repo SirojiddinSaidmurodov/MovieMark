@@ -22,7 +22,7 @@ public class JwtToken {
     private String header;
     @Value("${jwt.secret}")
     private String secret;
-    @Value("${jwt.expiration")
+    @Value("${jwt.expiration}")
     private long validity;
 
     @Autowired
