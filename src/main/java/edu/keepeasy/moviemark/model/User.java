@@ -1,5 +1,7 @@
 package edu.keepeasy.moviemark.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -11,6 +13,7 @@ public class User {
     @Column(name = "id", nullable = false)
     private Long id;
     private String username;
+    @JsonIgnore
     private String password;
     @Enumerated(EnumType.STRING)
     private Role role;
