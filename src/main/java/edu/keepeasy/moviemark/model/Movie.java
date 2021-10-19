@@ -15,7 +15,7 @@ public class Movie {
     private LocalDate releaseDate;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    private Set<Country> counties;
+    private Set<Country> countries;
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Artist> artists;
     @OneToMany(fetch = FetchType.EAGER)
