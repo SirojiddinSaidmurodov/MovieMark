@@ -81,11 +81,11 @@ public class Movie {
     }
 
     public Set<Country> getCounties() {
-        return counties;
+        return countries;
     }
 
     public void setCounties(Set<Country> counties) {
-        this.counties = counties;
+        this.countries = counties;
     }
 
     public Long getId() {
