@@ -7,16 +7,28 @@ import java.util.stream.Collectors;
 
 public enum Role {
     USER(Set.of(
-            new Permission(Movie.class, Action.READ),
             new Permission(Actor.class, Action.READ),
             new Permission(Artist.class, Action.READ),
             new Permission(Country.class, Action.READ),
+            new Permission(Movie.class, Action.READ),
             new Permission(Person.class, Action.READ),
             new Permission(Rate.class, Action.READ),
             new Permission(User.class, Action.READ)
     )),
     ADMIN(Set.of(
+            new Permission(Actor.class, Action.READ),
+            new Permission(Artist.class, Action.READ),
+            new Permission(Country.class, Action.READ),
+            new Permission(Movie.class, Action.READ),
+            new Permission(Person.class, Action.READ),
+            new Permission(Rate.class, Action.READ),
             new Permission(User.class, Action.READ),
+            new Permission(Actor.class, Action.WRITE),
+            new Permission(Artist.class, Action.WRITE),
+            new Permission(Country.class, Action.WRITE),
+            new Permission(Movie.class, Action.WRITE),
+            new Permission(Person.class, Action.WRITE),
+            new Permission(Rate.class, Action.WRITE),
             new Permission(User.class, Action.WRITE)
     ));
 
