@@ -28,7 +28,7 @@ spring:
       default-page-size: 10
       return-body-on-update: off
 jwt: #  Parameters of JWT generator 
-  secret: 3byyDlWfqKJtXuO4V3UYmMnl9fLFf1FlIhYOEXNqLWHFvxZEISgXjDOGGnt66jZ
+  secret: some-secret-key
   expiration: 604800
   header: Authorization
 
