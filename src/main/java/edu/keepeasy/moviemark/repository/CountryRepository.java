@@ -2,9 +2,10 @@ package edu.keepeasy.moviemark.repository;
 
 import edu.keepeasy.moviemark.model.Country;
 import io.swagger.annotations.Api;
-import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
-import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 @Api
-public interface CountryRepository extends PagingAndSortingRepository<Country, Long>, JpaSpecificationExecutor<Country> {
+@PreAuthorize("hasAuthority('Country:r')")
+public interface CountryRepository extends JpaRepository<Country, Long> {
 }

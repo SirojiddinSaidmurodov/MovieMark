@@ -1,13 +1,11 @@
 package edu.keepeasy.moviemark.model;
 
-public enum Permission {
-    MOVIE_R("movie:r"),
-    MOVIE_W("movie:w");
-
+public class Permission {
     private final String permission;
 
-    Permission(String permission) {
-        this.permission = permission;
+    Permission(Class<?> entityClass, Action action) {
+        String className = entityClass.getSimpleName();
+        this.permission = className + ":" + action.getAction();
     }
 
     public String getPermission() {
