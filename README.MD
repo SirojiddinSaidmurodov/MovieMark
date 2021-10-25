@@ -55,3 +55,5 @@ Swagger url: http://localhost:8080/swagger-ui/#/
 - [Spring Security Basic Authentication guide](https://www.baeldung.com/spring-security-basic-authentication)
 - [Spring Boot Security Authentication with JPA, Hibernate and MySQL](https://www.codejava.net/frameworks/spring-boot/spring-boot-security-authentication-with-jpa-hibernate-and-mysql)
 - [Base principles of using Spring Security video course by Eugene Suleimanov (ru)](https://www.youtube.com/watch?v=7uxROJ1nduk)
+- [Working with Relationships in Spring Data REST by baeldung](https://www.baeldung.com/spring-data-rest-relationships)
+- [POSTing a @OneToMany sub-resource association in Spring Data REST](https://newbedev.com/posting-a-onetomany-sub-resource-association-in-spring-data-rest)
