@@ -1,17 +1,16 @@
 package edu.keepeasy.moviemark.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
 public class Rate {
     @Id
     @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private byte value;
+    @Column(columnDefinition = "TINYINT(2) UNSIGNED")
+    private Integer value;
     @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
     private LocalDateTime timeOfChange;
     @ManyToOne
@@ -19,11 +18,11 @@ public class Rate {
     @ManyToOne
     private Movie movie;
 
-    public byte getValue() {
+    public Integer getValue() {
         return value;
     }
 
-    public void setValue(byte value) {
+    public void setValue(Integer value) {
         this.value = value;
     }
 

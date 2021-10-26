@@ -25,10 +25,10 @@ public class Movie {
     private Long budget;
     private Long box;
     private Duration duration;
-    @Formula("SELECT AVG(value) FROM rate WHERE movie_id = id")
-    private float rating;
+    @Formula("(SELECT AVG(rate.value) FROM rate WHERE rate.movie_id = id)")
+    private Float rating;
 
-    public float getRating() {
+    public Float getRating() {
         return rating;
     }
 
