@@ -1,5 +1,7 @@
 package edu.keepeasy.moviemark.model;
 
+import org.hibernate.annotations.Formula;
+
 import javax.persistence.*;
 import java.time.Duration;
 import java.time.LocalDate;
@@ -23,6 +25,12 @@ public class Movie {
     private Long budget;
     private Long box;
     private Duration duration;
+    @Formula("SELECT AVG(value) FROM rate WHERE movie_id = id")
+    private float rating;
+
+    public float getRating() {
+        return rating;
+    }
 
     public String getName() {
         return name;
