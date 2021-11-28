@@ -17,6 +17,18 @@ public class Person {
     private LocalDate birthDate;
     private String birthPlace;
 
+    public Person(Long id, String fullName, String originalName, Sex sex, LocalDate birthDate, String birthPlace) {
+        this.id = id;
+        this.fullName = fullName;
+        this.originalName = originalName;
+        this.sex = sex;
+        this.birthDate = birthDate;
+        this.birthPlace = birthPlace;
+    }
+
+    public Person() {
+    }
+
     public String getFullName() {
         return fullName;
     }

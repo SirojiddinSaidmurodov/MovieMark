@@ -12,6 +12,15 @@ public class Artist {
     @ManyToOne
     private Person person;
 
+    public Artist(Long id, String role, Person person) {
+        this.id = id;
+        this.role = role;
+        this.person = person;
+    }
+
+    public Artist() {
+    }
+
     public Person getPerson() {
         return person;
     }

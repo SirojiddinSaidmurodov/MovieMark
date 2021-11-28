@@ -15,6 +15,16 @@ public class Actor {
     @ManyToOne
     private Person person;
 
+    public Actor(Long id, String role, boolean cameo, Person person) {
+        this.id = id;
+        this.role = role;
+        this.cameo = cameo;
+        this.person = person;
+    }
+
+    public Actor() {
+    }
+
     public Person getPerson() {
         return person;
     }

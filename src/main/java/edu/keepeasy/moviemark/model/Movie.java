@@ -28,6 +28,22 @@ public class Movie {
     @Formula("(SELECT AVG(rate.value) FROM rate WHERE rate.movie_id = id)")
     private Float rating;
 
+    public Movie(Long id, String name, LocalDate releaseDate, Set<Country> countries, Set<Artist> artists, Set<Actor> actors, Long budget, Long box, Duration duration, Float rating) {
+        this.id = id;
+        this.name = name;
+        this.releaseDate = releaseDate;
+        this.countries = countries;
+        this.artists = artists;
+        this.actors = actors;
+        this.budget = budget;
+        this.box = box;
+        this.duration = duration;
+        this.rating = rating;
+    }
+
+    public Movie() {
+    }
+
     public Float getRating() {
         return rating;
     }
@@ -88,11 +104,11 @@ public class Movie {
         this.actors = actors;
     }
 
-    public Set<Country> getCounties() {
+    public Set<Country> getCountries() {
         return countries;
     }
 
-    public void setCounties(Set<Country> counties) {
+    public void setCountries(Set<Country> counties) {
         this.countries = counties;
     }
 

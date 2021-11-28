@@ -11,6 +11,18 @@ public class Rate {
     private Long id;
     @Column(columnDefinition = "TINYINT(2) UNSIGNED")
     private Integer value;
+
+    public Rate(Long id, Integer value, LocalDateTime timeOfChange, User user, Movie movie) {
+        this.id = id;
+        this.value = value;
+        this.timeOfChange = timeOfChange;
+        this.user = user;
+        this.movie = movie;
+    }
+
+    public Rate() {
+    }
+
     @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
     private LocalDateTime timeOfChange;
     @ManyToOne
