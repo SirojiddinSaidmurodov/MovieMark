@@ -14,7 +14,7 @@ import java.util.Set;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
-class MovieMarkApplicationTests {
+class MappersTest {
     final static Country usa = new Country(12L, "США");
     final static Person samuelLJackson = new Person(
             12L,
