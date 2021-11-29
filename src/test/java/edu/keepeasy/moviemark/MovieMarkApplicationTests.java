@@ -1,16 +1,14 @@
 package edu.keepeasy.moviemark;
 
 import edu.keepeasy.moviemark.dto.*;
-import edu.keepeasy.moviemark.mapper.ActorMapper;
-import edu.keepeasy.moviemark.mapper.CountryMapper;
-import edu.keepeasy.moviemark.mapper.MovieMapper;
-import edu.keepeasy.moviemark.mapper.PersonMapper;
+import edu.keepeasy.moviemark.mapper.*;
 import edu.keepeasy.moviemark.model.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.Duration;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -56,6 +54,15 @@ class MovieMarkApplicationTests {
             3.0F
     );
 
+    final static User user = new User(
+            123L,
+            "username",
+            "pass",
+            Role.USER,
+            true,
+            List.of(ironMan2));
+
+
     @Test
     void personMapperTest() {
         PersonDto personDto = PersonMapper.INSTANCE.toDto(samuelLJackson);
@@ -91,6 +98,13 @@ class MovieMarkApplicationTests {
         assertEquals(
                 ironMan2.getArtists().toArray(new Artist[0])[0].getId(),
                 movieDto.getArtists().toArray(new ArtistDto[0])[0].getId());
+    }
+
+    @Test
+    void userMapperTest() {
+        UserDto dto = UserMapper.INSTANCE.toDto(user);
+        assertEquals(user.getId(), dto.getId());
+        assertEquals(user.getUsername(), dto.getUsername());
     }
 
 }

@@ -24,6 +24,18 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "movie_id"))
     private List<Movie> watchList;
 
+    public User() {
+    }
+
+    public User(Long id, String username, String password, Role role, boolean active, List<Movie> watchList) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.role = role;
+        this.active = active;
+        this.watchList = watchList;
+    }
+
     public List<Movie> getWatchList() {
         return watchList;
     }
