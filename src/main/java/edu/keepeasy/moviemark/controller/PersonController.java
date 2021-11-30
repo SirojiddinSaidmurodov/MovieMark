@@ -1,36 +1,40 @@
 package edu.keepeasy.moviemark.controller;
 
-import edu.keepeasy.moviemark.model.Person;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import edu.keepeasy.moviemark.dto.PersonDto;
+import edu.keepeasy.moviemark.service.PersonService;
+import io.swagger.annotations.Api;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
+@Api(value = "Person")
 @RestController
-@RequestMapping("/persons")
-public class PersonController implements EntityController<Person, Long> {
-    @Override
-    public List<Person> getAll() {
-        return null;
+@RequestMapping(path = "person")
+public class PersonController {
+    private final PersonService service;
+
+    public PersonController(PersonService service) {
+        this.service = service;
     }
 
-    @Override
-    public Person getOne(Long id) {
-        return null;
+    @PostMapping
+    public ResponseEntity<PersonDto> savePerson(@RequestBody PersonDto person) {
+        return ResponseEntity.ok(service.save(person));
     }
 
-    @Override
-    public Person edit(Long id, Person person) {
-        return null;
+    @GetMapping("/{id}")
+    public ResponseEntity<PersonDto> getById(@PathVariable Long id) {
+        if (!service.isPresent(id)) {
+            return ResponseEntity.ok(service.findById(id));
+        }
+        return ResponseEntity.notFound().build();
     }
 
-    @Override
-    public Person delete(Long id) {
-        return null;
-    }
-
-    @Override
-    public Person create(Person person) {
-        return null;
+    @PutMapping("/{id}")
+    public ResponseEntity<PersonDto> edit(@PathVariable Long id, @RequestBody PersonDto person) {
+        if (!service.isPresent(id)) {
+            return ResponseEntity.notFound().build();
+        }
+        person.setId(id);
+        return ResponseEntity.ok(service.updateById(person));
     }
 }
