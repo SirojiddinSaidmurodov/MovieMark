@@ -1,23 +1,23 @@
 package edu.keepeasy.moviemark.service;
 
-import edu.keepeasy.moviemark.dto.ActorDto;
-import edu.keepeasy.moviemark.mapper.ActorMapper;
-import edu.keepeasy.moviemark.repository.ActorRepository;
+import edu.keepeasy.moviemark.dto.CountryDto;
+import edu.keepeasy.moviemark.mapper.CountryMapper;
+import edu.keepeasy.moviemark.repository.CountryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ActorService implements EntityService<ActorDto, Long> {
-    private final ActorRepository repository;
-    private final ActorMapper mapper = ActorMapper.INSTANCE;
+public class CountryService implements EntityService<CountryDto, Long> {
+    private final CountryMapper mapper = CountryMapper.INSTANCE;
+    private final CountryRepository repository;
 
     @Autowired
-    public ActorService(ActorRepository repository) {
+    public CountryService(CountryRepository repository) {
         this.repository = repository;
     }
 
     @Override
-    public ActorDto save(ActorDto dto) {
+    public CountryDto save(CountryDto dto) {
         return mapper.toDto(
                 repository.save(
                         mapper.toEntity(dto)
@@ -26,14 +26,14 @@ public class ActorService implements EntityService<ActorDto, Long> {
     }
 
     @Override
-    public ActorDto findById(Long id) {
+    public CountryDto findById(Long id) {
         return mapper.toDto(
                 repository.getById(id)
         );
     }
 
     @Override
-    public ActorDto updateById(ActorDto dto) {
+    public CountryDto updateById(CountryDto dto) {
         return mapper.toDto(
                 repository.save(
                         mapper.toEntity(dto)
@@ -48,6 +48,6 @@ public class ActorService implements EntityService<ActorDto, Long> {
 
     @Override
     public boolean isPresent(Long id) {
-        return repository.findById(id).isPresent();
+        return repository.existsById(id);
     }
 }

@@ -41,7 +41,7 @@ public class PersonService implements EntityService<PersonDto, Long> {
 
     @Override
     public void delete(Long id) {
-        repository.delete(repository.getById(id));
+        repository.deleteById(id);
     }
 
     @Override
