@@ -23,7 +23,7 @@ public class PersonController {
 
     @GetMapping("/{id}")
     public ResponseEntity<PersonDto> getById(@PathVariable Long id) {
-        if (!service.isPresent(id)) {
+        if (service.isPresent(id)) {
             return ResponseEntity.ok(service.findById(id));
         }
         return ResponseEntity.notFound().build();
@@ -31,10 +31,10 @@ public class PersonController {
 
     @PutMapping("/{id}")
     public ResponseEntity<PersonDto> edit(@PathVariable Long id, @RequestBody PersonDto person) {
-        if (!service.isPresent(id)) {
-            return ResponseEntity.notFound().build();
+        if (service.isPresent(id)) {
+            person.setId(id);
+            return ResponseEntity.ok(service.updateById(person));
         }
-        person.setId(id);
-        return ResponseEntity.ok(service.updateById(person));
+        return ResponseEntity.notFound().build();
     }
 }
