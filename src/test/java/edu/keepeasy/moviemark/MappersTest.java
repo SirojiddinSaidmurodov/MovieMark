@@ -4,7 +4,6 @@ import edu.keepeasy.moviemark.dto.*;
 import edu.keepeasy.moviemark.mapper.*;
 import edu.keepeasy.moviemark.model.*;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.Duration;
 import java.time.LocalDate;
@@ -13,7 +12,6 @@ import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@SpringBootTest
 class MappersTest {
     final static Country usa = new Country(12L, "США");
     final static Person samuelLJackson = new Person(
@@ -53,7 +51,6 @@ class MappersTest {
             Duration.ofMinutes(119),
             3.0F
     );
-
     final static User user = new User(
             123L,
             "username",
@@ -61,7 +58,6 @@ class MappersTest {
             Role.USER,
             true,
             List.of(ironMan2));
-
 
     @Test
     void personMapperTest() {

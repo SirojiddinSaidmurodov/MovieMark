@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Api(value = "Person")
 @RestController
-@RequestMapping(path = "person")
+@RequestMapping(path = "persons")
 public class PersonController {
     private final PersonService service;
 
