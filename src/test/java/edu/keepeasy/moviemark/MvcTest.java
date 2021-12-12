@@ -29,6 +29,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 public class MvcTest {
+    private final User authUser = new User(
+            10L,
+            "admin",
+            new BCryptPasswordEncoder(12).encode("admin"),
+            Role.ADMIN,
+            true,
+            new ArrayList<>());
     @Autowired
     private MockMvc mvc;
     @MockBean
@@ -38,33 +45,19 @@ public class MvcTest {
 
     @Test
     public void testAuthWithKnownCredentials() throws Exception {
-        when(userRepository.getUserByUsername("admin"))
-                .thenReturn(Optional.of(new User(
-                        10L,
-                        "admin",
-                        new BCryptPasswordEncoder(12).encode("admin"),
-                        Role.ADMIN,
-                        true,
-                        new ArrayList<>())));
+        when(userRepository.getUserByUsername(authUser.getUsername()))
+                .thenReturn(Optional.of(authUser));
         String body = "{\"password\": \"admin\",\"username\": \"admin\"}";
         mvc.perform(post("/api/auth/login")
                         .content(body)
                         .contentType("application/json"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("username").value("admin"));
+                .andExpect(jsonPath("username").value(authUser.getUsername()));
     }
 
     @Test
     public void testAuthWithUnknownCredentials() throws Exception {
-        when(userRepository.getUserByUsername("admin"))
-                .thenReturn(Optional.of(new User(
-                        10L,
-                        "admin",
-                        new BCryptPasswordEncoder(12).encode("admin"),
-                        Role.ADMIN,
-                        true,
-                        new ArrayList<>())));
-        String body = "{\"password\": \"someuser\",\"username\": \"someuser\"}";
+        String body = "{\"password\": \"admin\",\"username\": \"admin\"}";
         mvc.perform(post("/api/auth/login")
                         .content(body)
                         .contentType("application/json"))
@@ -75,13 +68,7 @@ public class MvcTest {
     @Test
     public void getPersonById() throws Exception {
         when(userRepository.getUserByUsername("admin"))
-                .thenReturn(Optional.of(new User(
-                        10L,
-                        "admin",
-                        new BCryptPasswordEncoder(12).encode("admin"),
-                        Role.ADMIN,
-                        true,
-                        new ArrayList<>())));
+                .thenReturn(Optional.of(authUser));
 
         when(personRepository.findById(12L))
                 .thenReturn(Optional.of(new Person(
