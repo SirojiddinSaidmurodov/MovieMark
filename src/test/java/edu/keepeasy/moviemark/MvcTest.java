@@ -1,5 +1,7 @@
 package edu.keepeasy.moviemark;
 
+import com.google.gson.Gson;
+import edu.keepeasy.moviemark.mapper.PersonMapper;
 import edu.keepeasy.moviemark.model.Person;
 import edu.keepeasy.moviemark.model.Role;
 import edu.keepeasy.moviemark.model.Sex;
@@ -36,6 +38,7 @@ public class MvcTest {
             Role.ADMIN,
             true,
             new ArrayList<>());
+    PersonMapper mapper = PersonMapper.INSTANCE;
     @Autowired
     private MockMvc mvc;
     @MockBean
@@ -48,7 +51,7 @@ public class MvcTest {
         when(userRepository.getUserByUsername(authUser.getUsername()))
                 .thenReturn(Optional.of(authUser));
         String body = "{\"password\": \"admin\",\"username\": \"admin\"}";
-        mvc.perform(post("/api/auth/login")
+        mvc.perform(post("/login")
                         .content(body)
                         .contentType("application/json"))
                 .andExpect(status().isOk())
@@ -58,7 +61,7 @@ public class MvcTest {
     @Test
     public void testAuthWithUnknownCredentials() throws Exception {
         String body = "{\"password\": \"admin\",\"username\": \"admin\"}";
-        mvc.perform(post("/api/auth/login")
+        mvc.perform(post("/login")
                         .content(body)
                         .contentType("application/json"))
                 .andExpect(status().is4xxClientError());
@@ -80,7 +83,7 @@ public class MvcTest {
                         "Вашингтон, округ Колумбия, США")));
 
         String body = "{\"password\": \"admin\",\"username\": \"admin\"}";
-        MvcResult result = mvc.perform(post("/api/auth/login")
+        MvcResult result = mvc.perform(post("/login")
                         .content(body)
                         .contentType("application/json"))
                 .andExpect(status().isOk()).andReturn();
@@ -95,5 +98,41 @@ public class MvcTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.fullName").value("Сэмюэл Л. Джексон"))
                 .andExpect(jsonPath("$.sex").value("MAN"));
+    }
+
+    @Test
+    public void createPerson() throws Exception {
+        when(userRepository.getUserByUsername("admin"))
+                .thenReturn(Optional.of(authUser));
+
+
+        when(personRepository.save(new Person(
+                12L,
+                "Сэмюэл Л. Джексон",
+                "Samuel L. Jackson",
+                Sex.MAN,
+                LocalDate.of(1948, 12, 21),
+                "Вашингтон, округ Колумбия, США"))).thenReturn(new Person(
+                12L,
+                "Сэмюэл Л. Джексон",
+                "Samuel L. Jackson",
+                Sex.MAN,
+                LocalDate.of(1948, 12, 21),
+                "Вашингтон, округ Колумбия, США"));
+
+        String body = "{\"password\": \"admin\",\"username\": \"admin\"}";
+        MvcResult result = mvc.perform(post("/login")
+                        .content(body)
+                        .contentType("application/json"))
+                .andExpect(status().isOk()).andReturn();
+        Gson gson = new Gson();
+        mvc.perform(post("/persons")
+                .content(gson.toJson(new Person(
+                        12L,
+                        "Сэмюэл Л. Джексон",
+                        "Samuel L. Jackson",
+                        Sex.MAN,
+                        LocalDate.of(1948, 12, 21),
+                        "Вашингтон, округ Колумбия, США")))).andExpect(status().isOk());
     }
 }

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 @Api(value = "Person")
 @RestController
 @RequestMapping(path = "persons")
-public class PersonController {
+public class PersonController implements EntityController<PersonDto, Long> {
     private final PersonService service;
 
     public PersonController(PersonService service) {
@@ -17,7 +17,7 @@ public class PersonController {
     }
 
     @PostMapping
-    public ResponseEntity<PersonDto> savePerson(@RequestBody PersonDto person) {
+    public ResponseEntity<PersonDto> save(@RequestBody PersonDto person) {
         return ResponseEntity.ok(service.save(person));
     }
 
